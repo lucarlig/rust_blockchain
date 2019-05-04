@@ -7,7 +7,7 @@ fn main() {
         vec![0; 32],
         0,
         "Genesis block!".to_owned(),
-        0x0000ffffffffffffffffffffffffffff,
+        0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
     );
 
     block.hash = block.hash();
