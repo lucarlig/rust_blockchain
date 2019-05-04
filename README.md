@@ -3,3 +3,4 @@
 
 - hashing block using sha256
 - displaying hash encoded in hexadecimal
+- mining using difficulty
