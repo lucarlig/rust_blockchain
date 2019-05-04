@@ -4,4 +4,13 @@ version = "0.1.0"
 authors = ["lucarlig <lucarlig@protonmail.com>"]
 edition = "2018"
 
+[lib]
+name = "blockchainlib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "blockchain"
+path = "src/main.rs"
+
 [dependencies]
+crypto-hash = "0.3.3"
