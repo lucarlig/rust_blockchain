@@ -5,16 +5,17 @@ fn main() {
         0,
         0,
         vec![0; 32],
-        0,
+        118318,
         "Genesis block!".to_owned(),
         0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
     );
+    // block.hash = block.hash();
+    // println!("{:x?}", block.hash());
+    // dbg!(block.hash);
+    // println!("{:x?}", &block);
 
-    block.hash = block.hash();
+    // block.mine();
 
-    println!("{:x?}", &block);
+    // println!("{:x?}", block.hash());
 
-    block.mine();
-
-    println!("{:x?}", &block);
 }

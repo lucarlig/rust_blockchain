@@ -23,7 +23,7 @@ impl Block {
         Block {
             index,
             timestamp,
-            hash: vec![0, 32],
+            hash: vec![0; 32],
             prev_block_hash,
             nonce,
             payload,
@@ -57,4 +57,116 @@ impl Hashable for Block {
 
 pub fn check_difficulty(hash: &BlockHash, difficulty: u128) -> bool {
     difficulty > difficulty_bytes_as_u128(&hash)
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_block_1() {
+        let block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            0,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+
+        assert_eq!(block.index, 0);
+        assert_eq!(block.timestamp, 0);
+        assert_eq!(block.hash, vec![0; 32]);
+        assert_eq!(block.prev_block_hash, vec![0; 32]);
+        assert_eq!(block.nonce, 0);
+        assert_eq!(block.payload, "Genesis block!".to_owned());
+        assert_eq!(block.difficulty, 0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff);
+    }
+    #[test]
+    fn test_bytes_1() {
+        let block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            0,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+        let bytes = vec![
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 71, 101, 110, 101, 115, 105, 115, 32, 98, 108, 111, 99, 107, 33, 255, 255, 255,
+            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0,
+        ];
+        assert_eq!(block.bytes(), bytes);
+    }
+    #[test]
+    fn test_hash_1() {
+        let block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            0,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+        let hash = vec![
+            190, 132, 42, 149, 178, 111, 155, 240, 196, 99, 49, 131, 135, 132, 80, 111, 224, 96,
+            79, 16, 46, 203, 164, 7, 120, 8, 152, 105, 36, 79, 233, 155,
+        ];
+        assert_eq!(hash, block.hash());
+    }
+    #[test]
+    fn test_hash_2() {
+        let block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            118318,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+        let hash = vec![
+            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
+            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
+        ];
+        assert_eq!(hash, block.hash());
+    }
+    #[test]
+    fn test_mine_1() {
+        let mut block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            0,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+        let hash_mined = [
+            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
+            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
+        ];
+        block.hash = block.hash();
+        block.mine();
+        assert_eq!(block.hash, hash_mined);
+    }
+    #[test]
+    fn test_mine_2() {
+        let mut block = Block::new(
+            0,
+            0,
+            vec![0; 32],
+            118318,
+            "Genesis block!".to_owned(),
+            0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
+        );
+        let hash_mined = [
+            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
+            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
+        ];
+        block.hash = block.hash();
+        block.mine();
+        assert_eq!(block.hash, hash_mined);
+    }
 }
