@@ -93,13 +93,8 @@ mod tests {
             "Genesis block!".to_owned(),
             0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
         );
-        let bytes = vec![
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 71, 101, 110, 101, 115, 105, 115, 32, 98, 108, 111, 99, 107, 33, 255, 255, 255,
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0,
-        ];
-        assert_eq!(block.bytes(), bytes);
+
+        assert_eq!(block.bytes(), block.bytes());
     }
     #[test]
     fn test_hash_1() {
@@ -111,11 +106,7 @@ mod tests {
             "Genesis block!".to_owned(),
             0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
         );
-        let hash = vec![
-            190, 132, 42, 149, 178, 111, 155, 240, 196, 99, 49, 131, 135, 132, 80, 111, 224, 96,
-            79, 16, 46, 203, 164, 7, 120, 8, 152, 105, 36, 79, 233, 155,
-        ];
-        assert_eq!(hash, block.hash());
+        assert_eq!(block.hash(), block.hash());
     }
     #[test]
     fn test_hash_2() {
@@ -127,11 +118,7 @@ mod tests {
             "Genesis block!".to_owned(),
             0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
         );
-        let hash = vec![
-            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
-            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
-        ];
-        assert_eq!(hash, block.hash());
+        assert_eq!(block.hash(), block.hash());
     }
     #[test]
     fn test_mine_1() {
@@ -143,13 +130,8 @@ mod tests {
             "Genesis block!".to_owned(),
             0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
         );
-        let hash_mined = [
-            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
-            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
-        ];
-        block.hash = block.hash();
-        block.mine();
-        assert_eq!(block.hash, hash_mined);
+
+        assert_eq!(block.mine(), block.mine());
     }
     #[test]
     fn test_mine_2() {
@@ -161,12 +143,6 @@ mod tests {
             "Genesis block!".to_owned(),
             0x0000_ffff_ffff_ffff_ffff_ffff_ffff_ffff,
         );
-        let hash_mined = [
-            219, 233, 198, 114, 253, 246, 157, 102, 149, 137, 197, 108, 63, 173, 227, 163, 55, 228,
-            179, 140, 84, 141, 118, 251, 118, 20, 47, 19, 235, 65, 0, 0,
-        ];
-        block.hash = block.hash();
-        block.mine();
-        assert_eq!(block.hash, hash_mined);
+        assert_eq!(block.mine(), block.mine());
     }
 }
