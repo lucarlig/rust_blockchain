@@ -2,7 +2,7 @@ use super::*;
 
 #[derive(Debug)]
 pub struct Block {
-    pub index: u32,
+    pub index: usize,
     pub timestamp: u128,
     pub hash: BlockHash,
     pub prev_block_hash: BlockHash,
@@ -13,7 +13,7 @@ pub struct Block {
 
 impl Block {
     pub fn new(
-        index: u32,
+        index: usize,
         timestamp: u128,
         prev_block_hash: BlockHash,
         nonce: u64,
