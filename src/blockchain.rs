@@ -1,5 +1,6 @@
 use super::*;
 
+#[derive(Default)]
 pub struct Blockchain {
     pub blocks: Vec<Block>,
     index: usize,
@@ -14,12 +15,12 @@ impl Blockchain {
     }
 
     pub fn add_block(&mut self, payload: String, difficulty: u128) {
-        if self.blocks.len() == 0 {
+        if self.blocks.is_empty() {
             let prev_block_hash = vec![0; 32];
             self.create_block(prev_block_hash, payload, difficulty);
         } else {
             let prev_block_hash = self.blocks[self.index].hash.clone();
-            self.index = self.index + 1;
+            self.index += 1;
             self.create_block(prev_block_hash, payload, difficulty);
         }
     }
