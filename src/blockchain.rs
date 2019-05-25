@@ -67,4 +67,3 @@ impl Blockchain {
         true
     }
 }
-
